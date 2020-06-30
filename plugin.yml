@@ -1,0 +1,17 @@
+name: City
+version: 1.1.9
+author: Maygo
+main: fr.maygo.city.City
+commands:
+  cite:
+    aliases: [spawn,hub,lobby]
+  option:
+    aliases: [options]
+  roue:
+  vanish:
+  house:
+  setteam:
+  inv:
+  ec:
+  info:
+    aliases: [say,warning]
