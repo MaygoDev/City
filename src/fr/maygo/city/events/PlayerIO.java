@@ -28,7 +28,7 @@ public class PlayerIO implements Listener {
 
 		city.getScoreboard().getTeam(Joueur.getJoueur(player.getUniqueId()).getTeam().getPower()
 				+ Joueur.getJoueur(player.getUniqueId()).getTeam().name()).addPlayer(player);
-		player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(0.0D);
+		player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(16.0);
 		player.setDisplayName(Joueur.getJoueur(player.getUniqueId()).getTeam().getPrefix()+player.getName());
 		if(!CmdVanish.vanished.isEmpty()) {
 			for(Player vanished : CmdVanish.vanished.keySet()) {

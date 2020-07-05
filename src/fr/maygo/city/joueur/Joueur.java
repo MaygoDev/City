@@ -43,23 +43,24 @@ public class Joueur {
 	public void setTeam(Teams team) {
 		this.team = team;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	public void setCredit(int credit) {
 		this.credit = credit;
-		Team.getTeam(team.name()).setCredit(credit);
 		City.getDisplayManager().updateDisplays();
 	}
 
 	public void addCredit(int credit) {
-		setCredit(getCredit() + credit); 
+		Team.getTeam(team.name()).setCredit(Team.getTeam(team.name()).getCredit() + credit);
+		setCredit(getCredit() + credit);
 	}
 
 	public void removeCredit(int credit) {
-		setCredit(getCredit() - credit); 
+		Team.getTeam(team.name()).setCredit(Team.getTeam(team.name()).getCredit() - credit);
+		setCredit(getCredit() - credit);
 	}
 
 	public UUID getId() {
@@ -69,10 +70,10 @@ public class Joueur {
 	public static Joueur getJoueur(UUID id) {
 		return joueurs.get(id);
 	}
-	
+
 	public static List<Joueur> getJoueurs() {
 		joueurss.clear();
-		for(Joueur joueur : joueurs.values()) {
+		for (Joueur joueur : joueurs.values()) {
 			joueurss.add(joueur);
 		}
 		return joueurss;
@@ -85,6 +86,5 @@ public class Joueur {
 	public String getName() {
 		return name;
 	}
-	
 
 }
