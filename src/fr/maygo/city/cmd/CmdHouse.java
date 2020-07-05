@@ -102,7 +102,7 @@ public class CmdHouse implements CommandExecutor, Listener {
 								player.sendMessage("§dMaison n°" + house.getId() + " :");
 								player.sendMessage("§dPrix (volume * 3) : " + house.getPrice());
 								player.sendMessage(
-										"§dOwner : " + (house.getOwner() == null ? "Personne" : house.getOwner()));
+										"§dOwner : " + (house.getOwner() == null ? "Personne" : Bukkit.getOfflinePlayer(house.getOwner()).getName()));
 								player.sendMessage("§d§m------------");
 								break;
 							}
@@ -214,6 +214,7 @@ public class CmdHouse implements CommandExecutor, Listener {
 							if (house.getOwner() == null) {
 								if (house.getPrice() <= Joueur.getJoueur(player.getUniqueId()).getCredit()) {
 									house.setOwner(player.getUniqueId());
+									Joueur.getJoueur(player.getUniqueId()).removeCredit(house.getPrice());
 									city.getDatabase().saveHouse(house, house.getId());
 									
 									Sign signBlock = (Sign) event.getClickedBlock().getState();

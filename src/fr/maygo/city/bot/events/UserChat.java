@@ -48,27 +48,32 @@ public class UserChat implements EventListener {
 						.setColor(Color.GREEN).setFooter("Par Maygo", event.getJDA().getSelfUser().getAvatarUrl())
 						.build()).queue();
 			} else if (message.startsWith("classement")) {
-				if (args.length == 1) {
+				if (message.equalsIgnoreCase("classement")) {
 					Collections.sort(Joueur.getJoueurs(), new JoueurComparator());
 					Collections.sort(Team.getTeams(), new TeamComparator());
-					String sub = "━━━━━━━━━━━━━━━━━\n";
+					String teams = "━━━━━━━━━━━━━━━━━\n";
+					String joueurs = "━━━━━━━━━━━━━━━━━\n";
 					for (Team team : Team.getTeams()) {
-						sub += (Team.getTeams().indexOf(team) + 1) + " - ** "
+						teams += (Team.getTeams().indexOf(team) + 1) + " - ** "
 								+ event.getJDA().getRoleById(team.getTeam().getDiscordRole()).getAsMention() + "** : *"
 								+ team.getCredit() + " émeraudes*\n";
 					}
-					sub += "━━━━━━━━━━━━━━━━━\n";
 					for (Joueur joueur : Joueur.joueurss) {
-						sub += (Joueur.joueurss.indexOf(joueur) + 1) + " - **"
+						joueurs += (Joueur.joueurss.indexOf(joueur) + 1) + " - **"
 								+ event.getJDA().getRoleById(joueur.getTeam().getDiscordRole()).getAsMention() + " "
 								+ joueur.getName() + "** : *" + joueur.getCredit() + " émeraudes*\n";
 					}
 					event.getGuild().getTextChannelById(event.getChannel().getIdLong())
 							.sendMessage(new EmbedBuilder().setTitle(":ballot_box_with_check: Classement")
-									.addField("*Voici le classement de la cité :*", sub, false).setColor(Color.GREEN)
+									.addField("*Voici le classement de la cité :*", teams, false).setColor(Color.GREEN)
 									.setFooter("Par Maygo", event.getJDA().getSelfUser().getAvatarUrl()).build())
 							.queue();
-				} else {
+					event.getGuild().getTextChannelById(event.getChannel().getIdLong())
+					.sendMessage(new EmbedBuilder().setTitle(":ballot_box_with_check: Classement")
+							.addField("*Voici le classement de la cité :*", joueurs, false).setColor(Color.GREEN)
+							.setFooter("Par Maygo", event.getJDA().getSelfUser().getAvatarUrl()).build())
+					.queue();
+				} else if (args.length > 1) {
 					if (args[1].equalsIgnoreCase("joueur")) {
 						if (Joueur.getJoueur(Bukkit.getOfflinePlayer(args[2]).getUniqueId()) != null) {
 							Joueur joueur = Joueur.getJoueur(Bukkit.getOfflinePlayer(args[2]).getUniqueId());

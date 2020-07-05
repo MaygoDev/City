@@ -50,21 +50,16 @@ public class Joueur {
 
 	public void setCredit(int credit) {
 		this.credit = credit;
-		Team.getTeam(team.name()).setCredit(Team.getTeam(team.name()).getCredit() - credit);
+		Team.getTeam(team.name()).setCredit(credit);
 		City.getDisplayManager().updateDisplays();
 	}
 
 	public void addCredit(int credit) {
-		this.credit += credit;
-		Team.getTeam(team.name()).setCredit(Team.getTeam(team.name()).getCredit() + credit);
-		City.getDisplayManager().updateDisplays();
-		
+		setCredit(getCredit() + credit); 
 	}
 
 	public void removeCredit(int credit) {
-		this.credit -= credit;
-		Team.getTeam(team.name()).setCredit(Team.getTeam(team.name()).getCredit() - credit);
-		City.getDisplayManager().updateDisplays();
+		setCredit(getCredit() - credit); 
 	}
 
 	public UUID getId() {

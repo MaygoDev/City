@@ -7,7 +7,7 @@ import fr.maygo.city.City;
 
 public class Serializer {
 	
-	private Gson gson;
+	public Gson gson;
 	
 	public Serializer(City city) {
 		this.gson = createGson();

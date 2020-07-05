@@ -26,6 +26,7 @@ import fr.maygo.city.bdd.FileUtils;
 import fr.maygo.city.bdd.Serializer;
 import fr.maygo.city.bot.Bot;
 import fr.maygo.city.cmd.CmdCite;
+import fr.maygo.city.cmd.CmdCredit;
 import fr.maygo.city.cmd.CmdEc;
 import fr.maygo.city.cmd.CmdHouse;
 import fr.maygo.city.cmd.CmdInfo;
@@ -126,6 +127,7 @@ public class City extends JavaPlugin {
 		getCommand("ec").setExecutor(new CmdEc());
 		getCommand("info").setExecutor(new CmdInfo()); 
 		getCommand("inv").setExecutor(new CmdInv());
+		getCommand("credit").setExecutor(new CmdCredit(this));
 		getCommand("vanish").setExecutor(new CmdVanish());
 		getCommand("roue").setExecutor(new CmdRoue(this));
 	}

@@ -9,6 +9,7 @@ commands:
     aliases: [options]
   roue:
   vanish:
+  credit:
   house:
   setteam:
   inv:

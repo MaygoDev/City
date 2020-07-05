@@ -1,5 +1,6 @@
 package fr.maygo.city.cmd;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +14,7 @@ public class CmdCite implements CommandExecutor {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (player.isOp()) {
-				Location loc = new Location(player.getWorld(), 288.8D, 113.0D, 217.5D, -130.0F, 0.0F);
+				Location loc = new Location(Bukkit.getWorld("world"), 288.8D, 113.0D, 217.5D, -130.0F, 0.0F);
 				player.teleport(loc);
 			} else {
 				player.sendMessage("§aCoordonées de la cité : ");
