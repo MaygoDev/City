@@ -1,6 +1,7 @@
 package fr.maygo.city.joueur;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,7 @@ public class Joueur {
 		for (Joueur joueur : joueurs.values()) {
 			joueurss.add(joueur);
 		}
+		Collections.sort(joueurss, new JoueurComparator());
 		return joueurss;
 	}
 

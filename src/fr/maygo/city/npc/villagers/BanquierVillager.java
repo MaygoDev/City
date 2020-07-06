@@ -5,8 +5,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import fr.maygo.city.City;
 import fr.maygo.city.joueur.Joueur;
 import fr.maygo.city.npc.VillagerClickable;
+import fr.maygo.city.teams.Teams;
 
 public class BanquierVillager extends VillagerClickable {
 
@@ -36,6 +38,11 @@ public class BanquierVillager extends VillagerClickable {
 				onClick.getPlayer().sendMessage("§cVous n'avez pas d'émeraudes sur vous !");
 			}else {
 				Joueur.getJoueur(onClick.getPlayer().getUniqueId()).addCredit(emerald);
+				Joueur.getJoueurs().stream().filter(joueur -> joueur.getTeam() == Joueur.getJoueur(onClick.getPlayer().getUniqueId()).getTeam()).forEach(joueur -> {
+					if(Bukkit.getPlayer(joueur.getId()) != null) {
+						City.getINSTANCE().getScoreboard().refresh(Bukkit.getPlayer(joueur.getId()));
+					}
+				});;
 				if(emerald >= 500) {
 					Bukkit.broadcastMessage("§a"+onClick.getPlayer().getName()+" à désposé §2"+emerald+" émeraudes !");
 				}

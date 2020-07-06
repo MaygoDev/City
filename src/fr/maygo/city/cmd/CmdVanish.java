@@ -30,12 +30,16 @@ public class CmdVanish implements CommandExecutor {
 				for(Player players : Bukkit.getOnlinePlayers()) {
 					players.showPlayer(player);
 				}
+				player.setCanPickupItems(true);
 				player.sendMessage("§dVanish : OFF");
 				vanished.remove(player);
 			}else {
 				for(Player players : Bukkit.getOnlinePlayers()) {
-					players.hidePlayer(player);
+					if(!players.isOp()) {
+						players.hidePlayer(player);
+					}
 				}
+				player.setCanPickupItems(false);
 				player.sendMessage("§dVanish : ON");
 				vanished.put(player, new BukkitRunnable() {
 					

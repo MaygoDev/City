@@ -2,6 +2,8 @@ package fr.maygo.city.bot;
 
 import javax.security.auth.login.LoginException;
 
+import org.bukkit.Bukkit;
+
 import fr.maygo.city.bot.events.UserChat;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
@@ -16,8 +18,13 @@ public class Bot {
 
 	public Bot() throws LoginException, IllegalArgumentException, RateLimitedException {
 		jda = new JDABuilder(AccountType.BOT).setToken("Njk3NTUxNDIwMjE1NTI1NDE2.XuflJA.HPmO08Qp2vkzhwPxdJzNWD8s9P8")
-				.setGame(Game.of("/help | Je te surveille !")).setStatus(OnlineStatus.ONLINE).buildAsync();
+				.setGame(Game.of(Bukkit.getOnlinePlayers().size() + " joueurs connectées."))
+				.setStatus(OnlineStatus.ONLINE).buildAsync();
 		jda.addEventListener(new UserChat(this));
+	}
+
+	public void setJoueurs(int joueurs) {
+		jda.getPresence().setGame(Game.of(joueurs + " joueurs connectées."));
 	}
 
 	public void disable() {

@@ -75,6 +75,7 @@ public class City extends JavaPlugin {
 	private Scoreboard sb;
 	private Serializer serializer;
 	private Database db;
+	private fr.maygo.city.scoreboard.Scoreboard scoreboard;
 	private Cuboid city;
 	private List<Villager> villagers = new ArrayList<>();
 	private List<House> houses = new ArrayList<>();
@@ -89,6 +90,7 @@ public class City extends JavaPlugin {
 		this.displayManager = new DisplayManager(this);
 		this.db = new Database(this);
 		this.sb = Bukkit.getScoreboardManager().getMainScoreboard();
+		this.scoreboard = new fr.maygo.city.scoreboard.Scoreboard();
 		registerTeams();
 		registerPlayers();
 		registerUtils();
@@ -286,10 +288,6 @@ public class City extends JavaPlugin {
 		return villagers;
 	}
 
-	public Scoreboard getScoreboard() {
-		return sb;
-	}
-
 	public Cuboid getCity() {
 		return city;
 	}
@@ -304,6 +302,10 @@ public class City extends JavaPlugin {
 
 	public Scoreboard getSb() {
 		return sb;
+	}
+	
+	public fr.maygo.city.scoreboard.Scoreboard getScoreboard() {
+		return scoreboard;
 	}
 
 	public void setSb(Scoreboard sb) {

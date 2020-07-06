@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.vehicle.VehicleCreateEvent;
@@ -60,6 +61,13 @@ public class EventCanceled implements Listener {
 			}
 		}
 	}
+	
+	@EventHandler
+	public void onPlayerBucket(PlayerBucketEmptyEvent event) {
+		if(isInCity(event.getBlockClicked().getLocation())) {
+			event.setCancelled(true);
+		}
+	}
 
 	@EventHandler
 	public void onSpawn(CreatureSpawnEvent e) {
@@ -86,7 +94,7 @@ public class EventCanceled implements Listener {
 	
 	@EventHandler
 	public void onCommand(PlayerCommandPreprocessEvent event) {
-		event.setCancelled(event.getMessage().substring(1).startsWith("me"));
+		event.setCancelled(event.getMessage().substring(1).startsWith("me") || event.getMessage().substring(1).startsWith("minecraft:me"));
 	}
 	
 }

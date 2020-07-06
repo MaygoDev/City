@@ -31,8 +31,8 @@ public class CmdTeam implements CommandExecutor {
 						Team.getTeam(Joueur.getJoueur(target.getUniqueId()).getTeam().name()).joueurs.remove(target.getUniqueId());
 						Team.getTeam(team.name()).joueurs.add(target.getUniqueId());
 						Joueur.getJoueur(target.getUniqueId()).setTeam(team);
-						City.INSTANCE.getScoreboard().getPlayerTeam(target).removePlayer(target);
-						City.INSTANCE.getScoreboard().getTeam(team.getPower()+team.name()).addPlayer(target);
+						City.INSTANCE.getSb().getPlayerTeam(target).removePlayer(target);
+						City.INSTANCE.getSb().getTeam(team.getPower()+team.name()).addPlayer(target);
 						player.setDisplayName(Joueur.getJoueur(player.getUniqueId()).getTeam().getPrefix()+player.getName());
 					} catch (IllegalArgumentException e) {
 						player.sendMessage("§cLa team " + args[1] + " n'existe pas !");
