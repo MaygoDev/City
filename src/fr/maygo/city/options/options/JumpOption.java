@@ -28,7 +28,10 @@ public class JumpOption extends Option implements Listener {
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
-		if(isState() && event.getMessage().equalsIgnoreCase("jump")) event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 338.5, 113, 209.5, -90, 0));
+		if(isState() && event.getMessage().equalsIgnoreCase("jump")) {
+			event.setCancelled(true);
+			event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 338.5, 113, 209.5, -90, 0));
+		}
 	}
 
 }

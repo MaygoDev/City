@@ -33,10 +33,30 @@ public abstract class Villager {
 		this.loc = loc;
 		this.name = name;
 		this.trades = trades;
+	}
+
+	public void spawn() {
+		villager = (org.bukkit.entity.Villager) loc.getWorld().spawnEntity(loc, EntityType.VILLAGER);
+		villager.setInvulnerable(true);
+		villager.setCustomNameVisible(true);
+		villager.setCustomName(name);
+
+		EntityVillager entityVillager = ((CraftVillager) villager).getHandle();
+		entityVillager.setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
+		entityVillager.setNoAI(true);
+		entityVillager.setInvulnerable(true);
+		entityVillager.setSilent(true);
+		try {
+			Field recipes = entityVillager.getClass().getDeclaredField("trades");
+			recipes.setAccessible(true);
+
+			recipes.set(entityVillager, trades);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if(trades != null) {
 			Bukkit.getPluginManager().registerEvents(new Listener() {
 	
-				@SuppressWarnings("unused")
 				@EventHandler
 				public void onInteract(PlayerInteractAtEntityEvent event) {
 					if (event.getRightClicked() != null) {
@@ -85,27 +105,6 @@ public abstract class Villager {
 					}
 				}
 			}, City.INSTANCE);
-		}
-	}
-
-	public void spawn() {
-		villager = (org.bukkit.entity.Villager) loc.getWorld().spawnEntity(loc, EntityType.VILLAGER);
-		villager.setInvulnerable(true);
-		villager.setCustomNameVisible(true);
-		villager.setCustomName(name);
-
-		EntityVillager entityVillager = ((CraftVillager) villager).getHandle();
-		entityVillager.setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
-		entityVillager.setNoAI(true);
-		entityVillager.setInvulnerable(true);
-		entityVillager.setSilent(true);
-		try {
-			Field recipes = entityVillager.getClass().getDeclaredField("trades");
-			recipes.setAccessible(true);
-
-			recipes.set(entityVillager, trades);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
